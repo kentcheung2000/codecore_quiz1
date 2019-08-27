@@ -31,9 +31,25 @@ router.get("/new", (req, res) => {
 });
 
 
-router.get('/cluckrs', function (req, res, next) {
-    res.send('The cluckrs route is working');
-});
+router.get("/cluckrs", (req, res) => {
+    // knex("cluckr")
+    //     .select("*")
+    //     .where({
+    //         content: req.params.content,
+    //         image_url: req.params.image_url
+    //     })
+    knex.select('*').from('cluckr')
+        .then(data => {
+            res.render("cluckrs", {
+                cluckr: data[0]
+            });
+        })
+    // .then((data) => {
+    //     res.render("cluckrs", {
+    //         cluckr: data[0]
+    //     })
+    // });
+})
 
 
 
