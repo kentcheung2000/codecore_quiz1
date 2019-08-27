@@ -4,6 +4,9 @@ const knex = require("../db/client");
 
 const router = express.Router();
 
+// let CluckrModel = require('../models/cluckr');
+
+// router.use('/cluckr', cluckr);
 
 router.get("/", (req, res) => {
     res.render('index');
@@ -28,20 +31,8 @@ router.get("/new", (req, res) => {
 });
 
 
-router.post("/", (req, res) => {
-    const cluckrsParams = {
-        content: req.body.content,
-        image_url: req.body.image_url,
-
-    };
-
-    // save a article to database
-    knex("cluckr")
-        .insert(cluckrsParams)
-        .returning("*")
-        .then((data) => {
-            res.redirect("/")
-        });
+router.get('/cluckrs', function (req, res, next) {
+    res.send('The cluckrs route is working');
 });
 
 
