@@ -28,6 +28,23 @@ router.get("/new", (req, res) => {
 });
 
 
+router.post("/", (req, res) => {
+    const cluckrsParams = {
+        content: req.body.content,
+        image_url: req.body.image_url,
+
+    };
+
+    // save a article to database
+    knex("cluckr")
+        .insert(cluckrsParams)
+        .returning("*")
+        .then((data) => {
+            res.send(data);
+        });
+});
+
+
 
 
 module.exports = router;
