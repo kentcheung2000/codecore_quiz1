@@ -40,7 +40,7 @@ router.post("/", (req, res) => {
         .insert(cluckrsParams)
         .returning("*")
         .then((data) => {
-            res.send(data);
+            res.redirect("/")
         });
 });
 
