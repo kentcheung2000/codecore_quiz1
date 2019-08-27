@@ -2,8 +2,27 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override');
+
+const cluckrRouter = require("./routes/cluckrs");
+
+const knex = require("./db/client");
 
 const app = express();
+
+app.use(express.urlencoded({
+    extended: true
+}));
+
+app.use(methodOverride((req, res) => {
+    if (req.body && req.body._method) {
+        const method = req.body._method
+        return method;
+    }
+    // method override will set the HTTP verb to whatever is returned inside of this callback
+    // We use this if we want to use the HTTP verbs DELETE, PATCH, PUT because HTML forms
+    // Do not support these verbs
+}))
 
 // app.use: use this function to mount middleware
 
@@ -22,9 +41,9 @@ app.use(getUsernameMiddleware);
 
 // this will parse x-www-urlencoded data to something that is easy to work with
 // it will also add this data to req.body
-app.use(express.urlencoded({
-    extended: true
-}));
+
+app.use(getUsernameMiddleware);
+
 
 console.log(__dirname);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,24 +59,7 @@ app.use(logger('dev'));
 
 app.set('view engine', 'ejs');
 
-app.get("/", (req, res) => {
-    res.render('index');
-})
-
-const COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7;
-app.post("/sign_in", (req, res) => {
-    // res.cookie is used to set the SET-COOKIE header telling a browser to store a cookie with information
-    res.cookie('username', req.body.username, {
-        maxAge: new Date(COOKIE_MAX_AGE)
-    })
-    res.redirect('/');
-})
-
-app.post("/sign_out", (req, res) => {
-    res.clearCookie("username"); // will remove the cookie
-    res.redirect("/");
-})
-
+app.use(cluckrRouter);
 
 const PORT = 4572;
 const ADDRESS = 'localhost';
