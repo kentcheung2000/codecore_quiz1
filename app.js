@@ -40,6 +40,10 @@ app.use(logger('dev'));
 
 app.set('view engine', 'ejs');
 
+app.get("/", (req, res) => {
+    res.render('index');
+})
+
 const COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7;
 app.post("/sign_in", (req, res) => {
     // res.cookie is used to set the SET-COOKIE header telling a browser to store a cookie with information
