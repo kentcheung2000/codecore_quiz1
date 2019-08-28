@@ -35,13 +35,13 @@ router.post("/new", (req, res) => {
         content: req.body.content,
         image_url: req.body.image_url,
     };
+    console.log("****************")
 
-    // save a article to database
     knex("cluckr")
         .insert(cluckrsParams)
         .returning("*")
         .then((data) => {
-            res.send(data);
+            res.redirect("/new");
         });
 });
 
