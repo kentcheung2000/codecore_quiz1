@@ -41,7 +41,7 @@ router.get("/cluckrs", (req, res) => {
     knex.select('*').from('cluckr')
         .then(data => {
             res.render("cluckrs", {
-                cluckr: data[0]
+                cluckr: data
             });
         })
     // .then((data) => {

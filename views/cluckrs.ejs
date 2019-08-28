@@ -2,22 +2,14 @@
 
 <h2>list cluckrs</h2>
 
+<ul>
+    <% cluckr.forEach(function (item) { %>
+    <%= item.content%>
+    <%= item.image_url %>
 
-<%= Object.keys(cluckr).forEach(function (item) {
-	//console.log(item); // key
-	console.log(cluckr[item]); // value
-});
+    <% })%>
 
-%>
-
-
-
-
-
-<%= console.log(cluckr.content)%>
-<%= console.log(cluckr.image_url) %>
-
-
+</ul>
 
 
 
