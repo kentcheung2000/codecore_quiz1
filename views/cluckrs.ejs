@@ -9,7 +9,9 @@
     <img src="images/cluck_master.jpg" width="42" height="42">
     <div>cluck_master</div>
     <li><%= item.content%> </li>
-    <li><img src=" <%= item.image_url %>" width="300" height="auto"></li>
+    <% if(item.image_url) { %>
+    <li><img src=" <%= item.image_url %>" width="300" height="auto"> </li>
+    <% } %>
     <% })%>
 
 </ul>

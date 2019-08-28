@@ -30,25 +30,31 @@ router.get("/new", (req, res) => {
     res.render("new");
 });
 
+router.post("/new", (req, res) => {
+    const cluckrsParams = {
+        content: req.body.content,
+        image_url: req.body.image_url,
+    };
+
+    // save a article to database
+    knex("cluckr")
+        .insert(cluckrsParams)
+        .returning("*")
+        .then((data) => {
+            res.send(data);
+        });
+});
+
 
 router.get("/cluckrs", (req, res) => {
-    // knex("cluckr")
-    //     .select("*")
-    //     .where({
-    //         content: req.params.content,
-    //         image_url: req.params.image_url
-    //     })
+
     knex.select('*').from('cluckr')
         .then(data => {
             res.render("cluckrs", {
                 cluckr: data
             });
         })
-    // .then((data) => {
-    //     res.render("cluckrs", {
-    //         cluckr: data[0]
-    //     })
-    // });
+
 })
 
 
