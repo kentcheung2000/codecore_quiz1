@@ -1,11 +1,17 @@
 <%- include("partials/header") %>
 <hr class="navborder">
 
-<form action="/sign_in" method="POST">
-    <label for="username">Username</label>
-    <br>
-    <input type="text" name="username"></input>
-    <input type="submit" value="Log In" class="btn btn-primary">
-</form>
+<ul>
+
+    <% cluckr.forEach(function (item) { %>
+    <img src="images/cluck_master.jpg" width="42" height="42">
+    <div>cluck_master</div>
+    <li><%= item.content%> </li>
+    <% if(item.image_url) { %>
+    <li><img src=" <%= item.image_url %>" width="300" height="auto"> </li>
+    <% } %>
+    <% })%>
+
+</ul>
 
 <%- include("partials/footer") %>
