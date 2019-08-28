@@ -1,6 +1,10 @@
 <%- include("partials/header") %>
 <hr class="navborder">
 <div class="form-group mb-3"></div>
+
+<% if(username) { %>
+
+
 <form action="/new" method="POST">
     <label for="content">Content</label>
     <br>
@@ -16,5 +20,7 @@
     <input type="submit" value="Cluck" class="btn btn-primary">
 
 </form>
+
+<% } %>
 
 <%- include("partials/footer") %>
